@@ -27,10 +27,10 @@ spec:
             spec:
               license:
                 accept: true
-                license: L-RJON-C7QG3S
+                license: L-JTPV-KYG8TF
               mqDashboard: true
-              version: "2021.4.1"
+              version: "16.1.0"
               replicas: 2
               storage:
-                class: managed-nfs-storage
+                class: ocs-storagecluster-cephfs
 
