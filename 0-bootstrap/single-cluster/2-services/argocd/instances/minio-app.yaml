@@ -15,7 +15,7 @@ spec:
   project: services
   source:
     path: instances/minio-storage
-    repoURL: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_SERVICES}
+    repoURL: https://github.com/ibmclientengineering/multi-tenancy-gitops-services.git
     targetRevision: master
   syncPolicy:
     automated:
