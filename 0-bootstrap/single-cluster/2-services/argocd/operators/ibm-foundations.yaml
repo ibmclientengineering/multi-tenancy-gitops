@@ -22,12 +22,12 @@ spec:
         ibm-common-services:
           subscriptions:
             subscription:
-              channel: v3
+              channel: v4.19
               config:
                 resources: {}
               installPlanApproval: Automatic
               name: ibm-common-service-operator
-              source: opencloud-operators
+              source: ibm-operator-catalog
               sourceNamespace: openshift-marketplace
   syncPolicy:
     automated:

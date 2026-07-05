@@ -18,9 +18,9 @@ resources:
 #- argocd/operators/ibm-datapower-operator.yaml
 #- argocd/operators/ibm-eventstreams-operator.yaml
 #- argocd/instances/ibm-eventstreams-instance.yaml
-#- argocd/operators/ibm-mq-operator.yaml
+- argocd/operators/ibm-mq-operator.yaml
 #- argocd/operators/ibm-opsdashboard-operator.yaml
-#- argocd/operators/ibm-platform-navigator.yaml
+- argocd/operators/ibm-platform-navigator.yaml
 #- argocd/instances/ibm-platform-navigator-instance.yaml
 
 ## Cloud Pak for Business Automation
@@ -67,7 +67,7 @@ resources:
 #- argocd/instances/ibm-cp4sthreatmanagements-instance.yaml
 
 ## IBM Foundational Services / Common Services
-#- argocd/operators/ibm-foundations.yaml
+- argocd/operators/ibm-foundations.yaml
 #- argocd/instances/ibm-foundational-services-instance.yaml
 #- argocd/operators/ibm-automation-foundation-core-operator.yaml
 #- argocd/operators/ibm-automation-foundation-operator.yaml
@@ -113,7 +113,7 @@ resources:
 # Required for IBM MQ
 #- argocd/instances/openldap.yaml
 # Required for IBM ACE, IBM MQ
-#- argocd/operators/cert-manager.yaml
+- argocd/operators/cert-manager.yaml
 #- argocd/instances/cert-manager-instance.yaml
 
 # Sealed Secrets
