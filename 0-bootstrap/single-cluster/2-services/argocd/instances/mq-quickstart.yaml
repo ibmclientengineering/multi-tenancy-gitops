@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: mq-quickstart
   annotations:
-    argocd.argoproj.io/sync-wave: "280"
+    argocd.argoproj.io/sync-wave: "240"
   labels:
     gitops.tier.group: ibm-cloudpak
     gitops.tier.layer: services
