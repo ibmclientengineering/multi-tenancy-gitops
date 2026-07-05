@@ -1,0 +1,189 @@
+{
+  "spec": {
+    "resourceHealthChecks": [
+      {
+        "check": "hs = {}\nhs.status = \"Progressing\"\nhs.message = \"\"\nif obj.status ~= nil then\n  if obj.status.health ~= nil then\n    hs.status = obj.status.health.status\n    if obj.status.health.message ~= nil then\n      hs.message = obj.status.health.message\n    end\n  end\nend\nreturn hs\n",
+        "group": "argoproj.io",
+        "kind": "Application"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.connectionState ~= nil then\n    if obj.status.connectionState.lastObservedState ~= nil then\n      if obj.status.connectionState.lastObservedState == \"READY\" then\n        hs.status = \"Healthy\"\n        return hs\n      end\n    end\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "operators.coreos.com",
+        "kind": "CatalogSource"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.phase ~= nil then\n    hs.message = obj.status.phase\n    if obj.status.phase == \"Complete\" then\n      hs.status = \"Healthy\"\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "operators.coreos.com",
+        "kind": "InstallPlan"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.installedCSV ~= nil then\n    hs.status = \"Healthy\"\n    hs.message = \"CSV Installed\"\n    if obj.status.state ~= nil then\n      hs.message = obj.status.state\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nif obj.status.state ~= nil then\n  hs.message = obj.status.state\nend\nreturn hs\n",
+        "group": "operators.coreos.com",
+        "kind": "Subscription"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.phase ~= nil then\n    hs.message = obj.status.phase\n    if obj.status.phase == \"Succeeded\" then\n      hs.status = \"Healthy\"\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "operator.ibm.com",
+        "kind": "CommonService"
+      },
+      {
+        "check": "hs = {}\ngeneration = obj.metadata.generation\nif obj.status ~= nil then\n  if obj.status.conditions ~= nil then\n    for i, condition in ipairs(obj.status.conditions) do\n      if condition.type == \"Ready\" and condition.status == \"True\" then\n        hs.status = \"Healthy\"\n        hs.message = condition.message\n        return hs\n      end\n      if condition.type == \"Ready\" and condition.reason == \"InProgress\" then\n        hs.status = \"Progressing\"\n        hs.message = condition.message\n        return hs\n      end\n    end\n  end\nend\nhs.status = \"Progressing\"\nreturn hs\n",
+        "group": "core.automation.ibm.com",
+        "kind": "Cartridge"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.zenStatus ~= nil then\n    hs.message = obj.status.zenStatus\n    if obj.status.zenStatus == \"Completed\" then\n      hs.status = \"Healthy\"\n    elseif obj.status.zenStatus == \"Failed\" then\n      hs.status = \"Degraded\"\n      hs.message = obj.status.zenStatus\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "zen.cpd.ibm.com",
+        "kind": "ZenService"
+      },
+      {
+        "check": "hs = {}\ngeneration = obj.metadata.generation\nif obj.status ~= nil then\n  if obj.status.conditions ~= nil then\n    for i, condition in ipairs(obj.status.conditions) do\n      if condition.type == \"Ready\" and condition.status == \"True\" then\n        hs.status = \"Healthy\"\n        hs.message = condition.message\n        return hs\n      end\n    end\n  end\nend\nhs.status = \"Progressing\"\nreturn hs\n",
+        "group": "integration.ibm.com",
+        "kind": "PlatformNavigator"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.phase ~= nil then\n    hs.message = obj.status.phase\n    if obj.status.phase == \"Running\" then\n      hs.status = \"Healthy\"\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "mq.ibm.com",
+        "kind": "QueueManager"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.phase ~= nil then\n    hs.message = obj.status.phase\n    if obj.status.phase == \"Ready\" then\n      hs.status = \"Healthy\"\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "appconnect.ibm.com",
+        "kind": "IntegrationServer"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.phase ~= nil then\n    hs.message = obj.status.phase\n    if obj.status.phase == \"Ready\" then\n      hs.status = \"Healthy\"\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "appconnect.ibm.com",
+        "kind": "Dashboard"
+      },
+      {
+        "check": "hs = {}\ngeneration = obj.metadata.generation\nif obj.status ~= nil then\n  if obj.status.conditions ~= nil then\n    for i, condition in ipairs(obj.status.conditions) do\n      if condition.type == \"Error\" and condition.status == \"True\" then\n        hs.status = \"Failed\"\n        hs.message = condition.message\n        return hs\n      end\n      if condition.type == \"Ready\" and condition.status == \"True\" then\n        hs.status = \"Healthy\"\n        hs.message = condition.message\n        return hs\n      end\n      if condition.type == \"Pending\" and condition.status == \"True\" then\n        hs.status = \"Progressing\"\n        hs.message = condition.message\n        return hs\n      end\n    end\n  end\nend\nhs.status = \"Progressing\"\nreturn hs\n",
+        "group": "apiconnect.ibm.com",
+        "kind": "APIConnectCluster"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.phase ~= nil then\n    hs.message = obj.status.phase\n    if obj.status.phase == \"Running\" then\n      hs.status = \"Healthy\"\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "datapower.ibm.com",
+        "kind": "DataPowerService"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.phase ~= nil then\n    hs.message = obj.status.phase\n    if obj.status.phase == \"Ready\" then\n      hs.status = \"Healthy\"\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "eventstreams.ibm.com",
+        "kind": "EventStreams"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.phase ~= nil then\n    hs.message = obj.status.phase\n    if obj.status.phase == \"Running\" then\n      hs.status = \"Healthy\"\n    elseif obj.status.phase == \"Failed\" then\n      hs.status = \"Degraded\"\n      hs.message = obj.status.failureMessage\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "orchestrator.aiops.ibm.com",
+        "kind": "Installation"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.phase ~= nil then\n    hs.message = obj.status.phase\n    if obj.status.phase == \"OK\" then\n      hs.status = \"Healthy\"\n    elseif obj.status.phase == \"Failed\" then\n      hs.status = \"Degraded\"\n      hs.message = obj.status.failureMessage\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "noi.ibm.com",
+        "kind": "NOI"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.controlPlaneStatus ~= nil then\n    hs.message = obj.status.controlPlaneStatus\n    if obj.status.controlPlaneStatus == \"Completed\" then\n      hs.status = \"Healthy\"\n    elseif obj.status.controlPlaneStatus == \"Failed\" then\n      hs.status = \"Degraded\"\n      hs.message = obj.status.controlPlaneStatus\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "cpd.ibm.com",
+        "kind": "Ibmcpd"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.reconcileStatus ~= nil then\n    hs.message = obj.status.reconcileStatus\n    if obj.status.reconcileStatus == \"Completed\" then\n      hs.status = \"Healthy\"\n    elseif obj.status.reconcileStatus == \"Failed\" then\n      hs.status = \"Degraded\"\n      hs.message = obj.status.reconcileStatus\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "db2u.databases.ibm.com",
+        "kind": "DvService"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.rstudioStatus ~= nil then\n    hs.message = obj.status.rstudioStatus\n    if obj.status.rstudioStatus == \"Completed\" then\n      hs.status = \"Healthy\"\n    elseif obj.status.rstudioStatus == \"Failed\" then\n      hs.status = \"Degraded\"\n      hs.message = obj.status.rstudioStatus\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "rstudio.cpd.ibm.com",
+        "kind": "RStudioAddon"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.wkcStatus ~= nil then\n    hs.message = obj.status.wkcStatus\n    if obj.status.wkcStatus == \"Completed\" then\n      hs.status = \"Healthy\"\n    elseif obj.status.wkcStatus == \"Failed\" then\n      hs.status = \"Degraded\"\n      hs.message = obj.status.wkcStatus\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "wkc.cpd.ibm.com",
+        "kind": "WKC"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.wmlStatus ~= nil then\n    hs.message = obj.status.wmlStatus\n    if obj.status.wmlStatus == \"Completed\" then\n      hs.status = \"Healthy\"\n    elseif obj.status.wmlStatus == \"Failed\" then\n      hs.status = \"Degraded\"\n      hs.message = obj.status.wmlStatus\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "wml.cpd.ibm.com",
+        "kind": "WmlBase"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.wosStatus ~= nil then\n    hs.message = obj.status.wosStatus\n    if obj.status.wosStatus == \"Completed\" then\n      hs.status = \"Healthy\"\n    elseif obj.status.wosStatus == \"Failed\" then\n      hs.status = \"Degraded\"\n      hs.message = obj.status.wosStatus\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "wos.cpd.ibm.com",
+        "kind": "WOService"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.wsStatus ~= nil then\n    hs.message = obj.status.wsStatus\n    if obj.status.wsStatus == \"Completed\" then\n      hs.status = \"Healthy\"\n    elseif obj.status.wsStatus == \"Failed\" then\n      hs.status = \"Degraded\"\n      hs.message = obj.status.wosStatus\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "ws.cpd.ibm.com",
+        "kind": "WS"
+      },
+      {
+        "check": "hs = {}\ngeneration = obj.metadata.generation\nif obj.status ~= nil then\n  observedGeneration = 0\n  if obj.status.observedGeneration ~= nil then\n    observedGeneration = tonumber(obj.status.observedGeneration)\n  end\n  if obj.status.conditions ~= nil then\n    hs.status = \"Failed\"\n    hs.message = \"\"\n    for i, condition in ipairs(obj.status.conditions) do\n      if condition.type == \"ReconciliationSuccess\" and observedGeneration == generation then\n        if condition.status == \"True\" then\n          hs.status = \"Healthy\"\n          hs.message = condition.message\n          return hs\n        else\n          hs.status = \"Degraded\"\n          hs.message = condition.message\n          return hs\n        end\n      end\n      if condition.type == \"Running\" and condition.status == \"True\" then\n        hs.status = \"Healthy\"\n        hs.message = condition.message\n        return hs\n      end\n    end\n  end\nend\nhs.status = \"Progressing\"\nreturn hs\n",
+        "group": "icp4a.ibm.com",
+        "kind": "ICP4ACluster"
+      },
+      {
+        "check": "hs = {}\ngeneration = obj.metadata.generation\nif obj.status ~= nil then\n  if obj.status.conditions ~= nil then\n    for i, condition in ipairs(obj.status.conditions) do\n      if condition.type == \"Ready\" and condition.status == \"True\" then\n        hs.status = \"Healthy\"\n        hs.message = condition.message\n        return hs\n      end\n      if condition.type == \"Running\" and condition.reason == \"Running\" then\n        hs.status = \"Progressing\"\n        hs.message = condition.message\n        return hs\n      end\n    end\n  end\nend\nhs.status = \"Progressing\"\nreturn hs\n",
+        "group": "processmining.ibm.com",
+        "kind": "ProcessMining"
+      },
+      {
+        "check": "hs = {}\ngeneration = obj.metadata.generation\nif obj.status ~= nil then\n  if obj.status.conditions ~= nil then\n    for i, condition in ipairs(obj.status.conditions) do\n      if condition.type == \"Success\" and condition.status == \"True\" then\n        hs.status = \"Healthy\"\n        hs.message = condition.message\n        return hs\n      end\n      if condition.type == \"Success\" and condition.reason == \"InProgress\" then\n        hs.status = \"Progressing\"\n        hs.message = condition.message\n        return hs\n      end\n    end\n  end\nend\nhs.status = \"Progressing\"\nreturn hs\n",
+        "group": "isc.ibm.com",
+        "kind": "CP4SThreatManagement"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.phase ~= nil then\n    hs.message = obj.status.phase\n    if obj.status.phase == \"Running\" then\n      hs.status = \"Healthy\"\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "operator.open-cluster-management.io",
+        "kind": "MultiClusterHub"
+      },
+      {
+        "check": "hs = {}\ngeneration = obj.metadata.generation\nif obj.status ~= nil then\n  if obj.status.conditions ~= nil then\n    for i, condition in ipairs(obj.status.conditions) do\n      if condition.type == \"Hibernating\" and condition.status == \"False\" then\n        hs.status = \"Healthy\"\n        hs.message = condition.message\n        return hs\n      end\n    end\n  end\nend\nhs.status = \"Progressing\"\nreturn hs\n",
+        "group": "hive.openshift.io",
+        "kind": "ClusterDeployment"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  if obj.status.phase ~= nil then\n    hs.message = obj.status.phase\n    if obj.status.phase == \"Ready\" then\n      hs.status = \"Healthy\"\n    else\n      hs.status = \"Progressing\"\n    end\n    return hs\n  end\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "ocs.openshift.io",
+        "kind": "StorageCluster"
+      },
+      {
+        "check": "hs = {}\nif obj.status ~= nil then\n  hs.message = \"Not Ready\"\n  if obj.status.replicas == 0 then\n    hs.status = \"Healthy\"\n    return hs\n  end\n  if obj.status.replicas == obj.status.availableReplicas then\n    hs.status = \"Healthy\"\n  else\n    hs.status = \"Progressing\"\n  end\n  return hs\nend\nhs.status = \"Progressing\"\nhs.message = \"Unknown\"\nreturn hs\n",
+        "group": "machine.openshift.io",
+        "kind": "MachineSet"
+      }
+    ],
+    "resourceIgnoreDifferences": {
+      "resourceIdentifiers": [
+        {
+          "customization": {
+            "jsonPointers": [
+              "/spec/source/targetRevision",
+              "/spec/source/repoURL"
+            ]
+          },
+          "group": "argoproj.io",
+          "kind": "Application"
+        },
+        {
+          "customization": {
+            "jsonPointers": [
+              "/spec/sourceRepos"
+            ]
+          },
+          "group": "argoproj.io",
+          "kind": "AppProject"
+        },
+        {
+          "customization": {
+            "jsonPointers": [
+              "/metadata/annotations/olm.providedAPIs",
+              "/status/lastUpdated"
+            ]
+          },
+          "group": "operators.coreos.com",
+          "kind": "OperatorGroup"
+        }
+      ]
+    }
+  }
+}
