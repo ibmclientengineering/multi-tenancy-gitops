@@ -28,6 +28,8 @@ spec:
               license:
                 accept: true
                 license: L-VEMB-RABZSN
+              # null removes the subchart default (field no longer exists in PN 16.2 CRD)
+              mqDashboard: null
               version: "16.2.0"
               replicas: 1
 
