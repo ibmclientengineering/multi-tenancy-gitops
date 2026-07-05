@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mq-quickstart
+  annotations:
+    argocd.argoproj.io/sync-wave: "280"
+  labels:
+    gitops.tier.group: ibm-cloudpak
+    gitops.tier.layer: services
+    gitops.tier.source: git
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  destination:
+    namespace: tools
+    server: https://kubernetes.default.svc
+  project: services
+  source:
+    path: instances/mq-quickstart
+    helm:
+      values: |
+        queuemanager:
+          name: mq-quickstart
+          spec:
+            license:
+              accept: true
+              license: L-VEMB-RABZSN
+              use: NonProduction
+            queueManager:
+              name: QUICKSTART
+              availability:
+                type: SingleInstance
+              storage:
+                queueManager:
+                  type: persistent-claim
+                  size: 1Gi
+                  class: ocs-storagecluster-ceph-rbd
+            version: 10.0.0.0-r1
+            web:
+              enabled: false

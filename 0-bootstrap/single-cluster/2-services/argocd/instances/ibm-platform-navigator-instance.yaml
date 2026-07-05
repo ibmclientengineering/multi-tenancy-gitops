@@ -27,10 +27,7 @@ spec:
             spec:
               license:
                 accept: true
-                license: L-RJON-C7QG3S
-              mqDashboard: true
-              version: "2021.4.1"
-              replicas: 2
-              storage:
-                class: managed-nfs-storage
+                license: L-VEMB-RABZSN
+              version: "16.2.0"
+              replicas: 1
 
