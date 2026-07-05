@@ -1,3 +1,5 @@
+> **Provenance**: Maintained by IBM Client Engineering (github.com/ibmclientengineering). Derived from cloud-native-toolkit/multi-tenancy-gitops (Apache-2.0); modernized for CP4I 16.x / OpenShift 4.18+ (July 2026).
+
 # Cloud Native Toolkit - GitOps Production Deployment Guide
 
 The GitOps concept originated from [Weaveworks](https://www.weave.works/) back in 2017 and the goal was to automate the operations of a Kubernetes (K8s) system using a model external to the system as the source of truth ([History of GitOps](https://www.weave.works/blog/the-history-of-gitops)).
