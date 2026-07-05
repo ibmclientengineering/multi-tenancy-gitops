@@ -113,7 +113,11 @@ resources:
 # Required for IBM MQ
 #- argocd/instances/openldap.yaml
 # Required for IBM ACE, IBM MQ
-- argocd/operators/cert-manager.yaml
+# NOTE 2026-07: left disabled — services repo still subscribes the retired
+# certified-operators 'cert-manager-operator' package; a dead Subscription in
+# openshift-operators would block OLM resolution for all operators there.
+# Fix pending in multi-tenancy-gitops-services (openshift-cert-manager-operator, stable-v1).
+#- argocd/operators/cert-manager.yaml
 #- argocd/instances/cert-manager-instance.yaml
 
 # Sealed Secrets
