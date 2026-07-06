@@ -11,6 +11,10 @@ resources:
 #- argocd/ace/stage.yaml
 #- argocd/ace/prod.yaml
 
+# ---- ACE SOAP backend — the create-customer integration calls this
+#      (deployment source: the ace-rest-ws repo in our org) ----
+#- argocd/soapserver/soapserver.yaml
+
 # ---- MQ ----
 #- argocd/mq/cicd.yaml
 #- argocd/mq/dev.yaml
