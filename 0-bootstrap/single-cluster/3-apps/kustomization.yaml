@@ -1,14 +1,23 @@
 resources:
+# =============================================================================
+# Applications layer — sample apps / pipelines that run ON the products above.
+# All disabled by default; uncomment to deploy. Non-portfolio demos
+# (bookinfo / soapserver / cp4a) removed 2026-07.
+# =============================================================================
+
+# ---- App Connect (ACE) ----
 #- argocd/ace/cicd.yaml
 #- argocd/ace/dev.yaml
 #- argocd/ace/stage.yaml
 #- argocd/ace/prod.yaml
 
+# ---- MQ ----
 #- argocd/mq/cicd.yaml
 #- argocd/mq/dev.yaml
 #- argocd/mq/stage.yaml
 #- argocd/mq/prod.yaml
 
+# ---- API Connect (APIC) ----
 #- argocd/apic/cicd.yaml
 #- argocd/apic/dev.yaml
 #- argocd/apic/stage.yaml
@@ -19,16 +28,8 @@ resources:
 #- argocd/apic/multi-cluster-app.yaml
 #- argocd/apic/multi-cluster-ops.yaml
 
+# ---- Event Streams ----
 #- argocd/es/dev.yaml
-
-#- argocd/bookinfo/cicd.yaml
-#- argocd/bookinfo/dev.yaml
-#- argocd/bookinfo/stage.yaml
-#- argocd/bookinfo/prod.yaml
-
-#- argocd/soapserver/soapserver.yaml
-
-#- argocd/cp4a/cp4a.yaml
 
 patches:
 - target:

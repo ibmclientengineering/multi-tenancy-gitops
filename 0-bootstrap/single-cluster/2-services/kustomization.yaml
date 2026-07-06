@@ -1,166 +1,101 @@
 resources:
-# IBM Software
+# =============================================================================
+# IBM Automation portfolio — services layer.
+# Enable a product by uncommenting its lines; comment them out to remove it.
+# UNCOMMENTED below = the active profile (minimal CP4I validation:
+# Platform Navigator + MQ + foundations + cert-manager).
+# Only the products we actually deliver are listed here — the upstream
+# Cloud Pak kitchen sink (CP4D / CP4S / CP4BA / Aspera / SPP / service-mesh)
+# was removed 2026-07.
+# =============================================================================
 
-## HashiCorp Integration 
-#- argocd/operators/ibm-vault-operator.yaml
-#- argocd/instances/ibm-vault-setup.yaml
-#- argocd/instance/ibm-vault-deploy.yaml
+# ---- Cloud Pak for Integration — base (Platform Navigator + foundations) ----
+- argocd/operators/ibm-platform-navigator.yaml
+- argocd/instances/ibm-platform-navigator-instance.yaml
+- argocd/operators/ibm-foundations.yaml
+#- argocd/instances/ibm-foundational-services-instance.yaml
+#- argocd/operators/ibm-license-service-operator.yaml
+#- argocd/instances/ibm-license-service-instance.yaml
+#- argocd/operators/ibm-catalogs.yaml
+#- argocd/operators/ibm-cp4i-operators.yaml
 
-## Cloud Pak for Integration
+# ---- CP4I — MQ ----
+- argocd/operators/ibm-mq-operator.yaml
+- argocd/instances/mq-quickstart.yaml
+
+# ---- CP4I — App Connect (ACE) ----
 #- argocd/operators/ibm-ace-operator.yaml
+
+# ---- CP4I — API Connect (APIC) + DataPower gateway ----
 #- argocd/operators/ibm-apic-operator.yaml
+#- argocd/operators/ibm-datapower-operator.yaml
 #- argocd/instances/ibm-apic-instance.yaml
 #- argocd/instances/ibm-apic-management-portal-instance.yaml
 #- argocd/instances/ibm-apic-gateway-analytics-instance.yaml
-#- argocd/operators/ibm-aspera-operator.yaml
-#- argocd/operators/ibm-assetrepository-operator.yaml
-#- argocd/operators/ibm-cp4i-operators.yaml
-#- argocd/operators/ibm-datapower-operator.yaml
+
+# ---- CP4I — Event Streams (Kafka)  [under review: Event Automation withdrawn -> Confluent] ----
 #- argocd/operators/ibm-eventstreams-operator.yaml
 #- argocd/instances/ibm-eventstreams-instance.yaml
-- argocd/operators/ibm-mq-operator.yaml
-- argocd/instances/mq-quickstart.yaml
-#- argocd/operators/ibm-opsdashboard-operator.yaml
-- argocd/operators/ibm-platform-navigator.yaml
-- argocd/instances/ibm-platform-navigator-instance.yaml
 
-## Cloud Pak for Business Automation
-#- argocd/operators/ibm-cp4a-operator.yaml
+# ---- Instana — observability agent ----
+#- argocd/instances/instana-agent.yaml
+#- argocd/instances/instana-robot-shop.yaml
+
+# ---- Sterling B2B — B2B Integrator / File Gateway (needs db2u) ----
 #- argocd/operators/ibm-db2u-operator.yaml
-#- argocd/operators/ibm-process-mining-operator.yaml
-#- argocd/instances/ibm-process-mining-instance.yaml
-
-# IBM CP4BA & ODM Instance
-#- argocd/operators/ibm-cp4ba-db2.yaml
-#- argocd/instances/ibm-cp4ba-db2ucluster.yaml
-#- argocd/instances/ibm-cp4ba-db2u-setup.yaml 
-#- argocd/instances/ibm-cp4ba-openldap-odm.yaml
-#- argocd/instances/ibm-cp4ba-baw.yaml
-#- argocd/operators/ibm-cp4ba-operator.yaml
-#- argocd/instances/ibm-cp4ba-icp4acluster.yaml
-#- argocd/instances/ibm-cp4ba-icp4acluster-postdeploy.yaml
-
-## Cloud Pak for Data
-#- argocd/operators/ibm-cpd-scheduling-operator.yaml
-#- argocd/instances/ibm-cpd-scheduling-instance.yaml
-#- argocd/operators/ibm-cpd-platform-operator.yaml
-#- argocd/instances/ibm-cpd-instance.yaml
-#- argocd/operators/ibm-cpd-ws-operator.yaml
-#- argocd/instances/ibm-cpd-ws-instance.yaml
-#- argocd/operators/ibm-cpd-wkc-operator.yaml
-#- argocd/instances/ibm-cpd-wkc-instance.yaml
-#- argocd/operators/ibm-cpd-ds-operator.yaml
-#- argocd/instances/ibm-cpd-ds-instance.yaml
-#- argocd/operators/ibm-cpd-aespark-operator.yaml
-#- argocd/instances/ibm-cpd-aespark-instance.yaml
-#- argocd/operators/ibm-cpd-wos-operator.yaml
-#- argocd/instances/ibm-cpd-wos-instance.yaml
-#- argocd/operators/ibm-cpd-dv-operator.yaml
-#- argocd/instances/ibm-cpd-dv-instance.yaml
-#- argocd/operators/ibm-cpd-wml-operator.yaml
-#- argocd/instances/ibm-cpd-wml-instance.yaml
-
-## Cloud Pak for Data Demos
-#- argocd/instances/cp4d-pattern-healthcare.yaml
-
-## Cloud Pak for Security
-#- argocd/operators/ibm-cp4s-operator.yaml
-#- argocd/instances/ibm-cp4sthreatmanagements-instance.yaml
-
-## IBM Foundational Services / Common Services
-- argocd/operators/ibm-foundations.yaml
-#- argocd/instances/ibm-foundational-services-instance.yaml
-#- argocd/operators/ibm-automation-foundation-core-operator.yaml
-#- argocd/operators/ibm-automation-foundation-operator.yaml
-#- argocd/operators/ibm-license-service-operator.yaml
-#- argocd/instances/ibm-license-service-instance.yaml
-
-## IBM Catalogs
-#- argocd/operators/ibm-catalogs.yaml
-
-# PAW
-#- argocd/instances/ibm-paw.yaml
-
-# B2BI
+#- argocd/instances/ibm-sfg-db2-nonprod.yaml
+#- argocd/instances/ibm-sfg-mq-nonprod.yaml
+#- argocd/instances/ibm-sfg-b2bi-nonprod-setup.yaml
+#- argocd/instances/ibm-sfg-b2bi-nonprod.yaml
 #- argocd/instances/ibm-sfg-db2-prod.yaml
 #- argocd/instances/ibm-sfg-mq-prod.yaml
 #- argocd/instances/ibm-sfg-b2bi-prod-setup.yaml
 #- argocd/instances/ibm-sfg-b2bi-prod.yaml
 #- argocd/instances/ibm-sfg-b2bi-612-setup.yaml
 #- argocd/instances/ibm-sfg-b2bi-612.yaml
-#- argocd/instances/ibm-sfg-db2-nonprod.yaml
-#- argocd/instances/ibm-sfg-mq-nonprod.yaml
-#- argocd/instances/ibm-sfg-b2bi-nonprod-setup.yaml
-#- argocd/instances/ibm-sfg-b2bi-nonprod.yaml
 
-# Sterling Secure Proxy
+# ---- Sterling — Secure Proxy ----
 #- argocd/instances/sterling-secure-proxy-cm-instance.yaml
 #- argocd/instances/sterling-secure-proxy-engine-instance.yaml
 
-# PEM
+# ---- Sterling — Connect:Direct ----
+#- argocd/instances/ibm-connect-direct-setup.yaml
+#- argocd/instances/ibm-connect-direct.yaml
+
+# ---- Sterling — Partner Engagement Manager (PEM) ----
 #- argocd/instances/ibm-pem-db2.yaml
 #- argocd/instances/ibm-pem-db2test.yaml
 #- argocd/instances/ibm-pem-setup.yaml
 #- argocd/instances/ibm-pem.yaml
 
-## Connect Direct
-#- argocd/instances/ibm-connect-direct-setup.yaml
-#- argocd/instances/ibm-connect-direct.yaml
-# SCCM
-# - argocd/instances/ibm-sccm-db2.yaml
-# - argocd/instances/ibm-sccm-setup.yaml
-# - argocd/instances/ibm-sccm.yaml
+# ---- Sterling — Control Center Monitor (SCCM) ----
+#- argocd/instances/ibm-sccm-db2.yaml
+#- argocd/instances/ibm-sccm-setup.yaml
+#- argocd/instances/ibm-sccm.yaml
 
-# Required for IBM MQ
+# ---- HashiCorp Vault ----
+#- argocd/operators/ibm-vault-operator.yaml
+#- argocd/instances/ibm-vault-setup.yaml
+#- argocd/instances/ibm-vault-deploy.yaml
+
+# ---- Shared — auth / secrets / pipelines ----
 #- argocd/instances/openldap.yaml
-# Required for IBM ACE, IBM MQ
-# NOTE 2026-07: left disabled — services repo still subscribes the retired
-# certified-operators 'cert-manager-operator' package; a dead Subscription in
-# openshift-operators would block OLM resolution for all operators there.
-# Fix pending in multi-tenancy-gitops-services (openshift-cert-manager-operator, stable-v1).
-- argocd/operators/cert-manager.yaml
-# instance stays disabled: the Red Hat cert-manager operator manages its own 'cluster' CertManager CR
-#- argocd/instances/cert-manager-instance.yaml
-
-# Sealed Secrets
 #- argocd/instances/sealed-secrets.yaml
-
-# CICD
-#- argocd/operators/grafana-operator.yaml
-#- argocd/instances/grafana-instance.yaml
-#- argocd/instances/grafana-instana.yaml
-#- argocd/instances/artifactory.yaml
-#- argocd/instances/chartmuseum.yaml
-#- argocd/instances/developer-dashboard.yaml
-#- argocd/instances/swaggereditor.yaml
-#- argocd/instances/sonarqube.yaml
-#- argocd/instances/pact-broker.yaml
-# In OCP 4.7+ we need to install openshift-pipelines and possibly privileged scc to the pipeline serviceaccount
 #- argocd/operators/openshift-pipelines.yaml
+#- argocd/operators/openshift-gitops.yaml
 
-# Serverless
-#- argocd/operators/openshift-serverless.yaml
-#- argocd/instances/openshift-serverless-knative-serving-instance.yaml
+# ---- CP4I — Automation Foundation (legacy; verify CP4I 16.x need before enabling) ----
+#- argocd/operators/ibm-automation-foundation-core-operator.yaml
+#- argocd/operators/ibm-automation-foundation-operator.yaml
 
-# Service Mesh
-#- argocd/operators/elasticsearch.yaml
-#- argocd/operators/jaeger.yaml
-#- argocd/operators/kiali.yaml
-#- argocd/operators/openshift-service-mesh.yaml
-#- argocd/instances/openshift-service-mesh-instance.yaml
-
-# Monitoring
-#- argocd/instances/instana-agent.yaml
-#- argocd/instances/instana-robot-shop.yaml
-
-# Spectrum Protect Plus
-#- argocd/operators/spp-catalog.yaml
-#- argocd/operators/spp-operator.yaml
-#- argocd/instances/spp-instance.yaml
-#- argocd/operators/oadp-operator.yaml
-#- argocd/instances/oadp-instance.yaml
-#- argocd/instances/baas-instance.yaml
-
+# ---- cert-manager (required by CP4I / ACE / MQ) ----
+# NOTE 2026-07: instance stays disabled — the Red Hat cert-manager operator
+# manages its own 'cluster' CertManager CR. Services repo must subscribe the
+# Red Hat 'openshift-cert-manager-operator' (stable-v1), NOT the retired
+# 'certified-operators' cert-manager-operator package (a dead Subscription in
+# openshift-operators blocks OLM resolution for every operator there).
+- argocd/operators/cert-manager.yaml
+#- argocd/instances/cert-manager-instance.yaml
 
 patches:
 - target:

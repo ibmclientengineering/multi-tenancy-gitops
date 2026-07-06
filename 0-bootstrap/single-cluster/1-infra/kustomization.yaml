@@ -1,60 +1,68 @@
 resources:
-#- argocd/consolelink.yaml
-#- argocd/consolenotification.yaml
-#- argocd/machine-configuration.yaml
+# =============================================================================
+# Infra layer — namespaces, service accounts, cluster-wide config.
+# UNCOMMENTED = active profile. Enable a product's namespace/SA/SCC by
+# uncommenting the matching lines when you enable it in 2-services.
+# Non-portfolio namespaces (CP4D / CP4S / CP4BA / SPP / service-mesh) removed 2026-07.
+# =============================================================================
+
+# ---- active (minimal profile) ----
 - argocd/namespace-ibm-common-services.yaml
-#- argocd/namespace-ci.yaml
-#- argocd/namespace-cp4ba.yaml
-#- argocd/namespace-dev.yaml
-#- argocd/namespace-staging.yaml
-#- argocd/namespace-prod.yaml
-#- argocd/namespace-cloudpak.yaml
-#- argocd/namespace-istio-system.yaml
-#- argocd/namespace-openldap.yaml
-#- argocd/namespace-sealed-secrets.yaml
 - argocd/namespace-tools.yaml
-#- argocd/namespace-vault.yaml
-#- argocd/namespace-instana-agent.yaml
-#- argocd/namespace-robot-shop.yaml
-#- argocd/namespace-openshift-serverless.yaml
-#- argocd/namespace-knative-eventing.yaml
-#- argocd/namespace-knative-serving.yaml
-#- argocd/namespace-knative-serving-ingress.yaml
-#- argocd/namespace-odm.yaml
-#- argocd/namespace-openshift-storage.yaml
-#- argocd/namespace-spp.yaml
-#- argocd/namespace-spp-velero.yaml
-#- argocd/namespace-baas.yaml
-#- argocd/namespace-db2.yaml
+
+# ---- CP4I ----
+#- argocd/namespace-cloudpak.yaml
 #- argocd/namespace-mq.yaml
+#- argocd/serviceaccounts-mq.yaml
+
+# ---- Instana ----
+#- argocd/namespace-instana-agent.yaml
+
+# ---- Sterling B2B (B2Bi / SFG / SSP / Connect:Direct / PEM / SCCM) ----
+#- argocd/namespace-db2.yaml
+#- argocd/serviceaccounts-db2.yaml
 #- argocd/namespace-b2bi-prod.yaml
 #- argocd/namespace-b2bi-612.yaml
 #- argocd/namespace-b2bi-nonprod.yaml
-#- argocd/namespace-pem.yaml
-#- argocd/namespace-ssp.yaml
-#- argocd/namespace-sccm.yaml
-#- argocd/serviceaccounts-vault.yaml
-#- argocd/serviceaccounts-baw.yaml
-#- argocd/serviceaccounts-ibm-common-services.yaml
-#- argocd/serviceaccounts-tools.yaml
-#- argocd/serviceaccounts-db2.yaml
-#- argocd/serviceaccounts-mq.yaml
 #- argocd/serviceaccounts-b2bi-prod.yaml
 #- argocd/serviceaccounts-b2bi-612.yaml
 #- argocd/serviceaccounts-b2bi-nonprod.yaml
-#- argocd/namespace-ssp.yaml
-#- argocd/serviceaccounts-pem.yaml
-#- argocd/serviceaccounts-sccm.yaml
 #- argocd/sfg-b2bi-clusterwide.yaml
+#- argocd/namespace-ssp.yaml
+#- argocd/namespace-connect-direct.yaml
+#- argocd/serviceaccounts-connect-direct.yaml
+#- argocd/sterling-cd-clusterwide.yaml
+#- argocd/namespace-pem.yaml
+#- argocd/serviceaccounts-pem.yaml
 #- argocd/pem-b2bi-clusterwide.yaml
+#- argocd/namespace-sccm.yaml
+#- argocd/serviceaccounts-sccm.yaml
 #- argocd/sccm-clusterwide.yaml
-#- argocd/scc-wkc-iis.yaml
-#- argocd/norootsquash.yaml
-#- argocd/daemonset-sync-global-pullsecret.yaml
-#- argocd/storage.yaml
-#- argocd/infraconfig.yaml
+
+# ---- Vault ----
+#- argocd/namespace-vault.yaml
+#- argocd/serviceaccounts-vault.yaml
+
+# ---- shared: pipeline namespaces, auth, secrets ----
+#- argocd/namespace-ci.yaml
+#- argocd/namespace-dev.yaml
+#- argocd/namespace-staging.yaml
+#- argocd/namespace-prod.yaml
+#- argocd/namespace-openldap.yaml
+#- argocd/namespace-sealed-secrets.yaml
+#- argocd/serviceaccounts-ibm-common-services.yaml
+#- argocd/serviceaccounts-tools.yaml
+
+# ---- cluster-wide infra (enable per environment) ----
+#- argocd/consolelink.yaml
+#- argocd/consolenotification.yaml
+#- argocd/machine-configuration.yaml
 #- argocd/machinesets.yaml
-#- argocd/namespace-minio.yaml
+#- argocd/infraconfig.yaml
+#- argocd/norootsquash.yaml
+#- argocd/storage.yaml
+#- argocd/namespace-openshift-storage.yaml
+#- argocd/daemonset-sync-global-pullsecret.yaml
 patches:
 - target:
     group: argoproj.io
